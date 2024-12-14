@@ -29,6 +29,8 @@ def main(args):
     config['path_dataset'] = '.'  # MODIFIED, substituted get_config
     if args.dataset == "animalkingdom":
         dataset = 'AnimalKingdom'
+    elif args.dataset == "baboonland":
+        dataset = 'baboonland'
     elif args.dataset == "ava":
         dataset = 'AVA'
     else:
@@ -53,11 +55,11 @@ def main(args):
 
     # criterion or loss
     import torch.nn as nn
-    if args.dataset in ['animalkingdom']:
+    if args.dataset in ['animalkingdom', 'baboonland']:
         criterion = nn.BCEWithLogitsLoss()
 
     # evaluation metric
-    if args.dataset in ['animalkingdom']:
+    if args.dataset in ['animalkingdom', 'baboonland']:
         from torchmetrics.classification import MultilabelAveragePrecision
         eval_metric = MultilabelAveragePrecision(num_labels=num_classes, average='micro')
         eval_metric_string = 'Multilabel Average Precision'
