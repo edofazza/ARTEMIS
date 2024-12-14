@@ -25,7 +25,7 @@ class SummaryDataset(Dataset):
 
 def get_embeddings():
     """ DATASET CREATION """
-    csv_path = 'only_summary.csv'
+    csv_path = 'animalkingdom_summary.csv'
     dataset = SummaryDataset(csv_path)
     dataloader = DataLoader(dataset, batch_size=64, shuffle=False, num_workers=1, persistent_workers=True)
     """ TEXT CLIP ENCODER INITIALIZATION """
