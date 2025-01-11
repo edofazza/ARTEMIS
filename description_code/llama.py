@@ -53,7 +53,7 @@ def single_run():
     dataloader = DataLoader(dataset, batch_size=4, shuffle=False, num_workers=2, persistent_workers=True)
     """ LLAMA INITIALIZATION """
     model_id = 'meta-llama/Meta-Llama-3-8B-Instruct'
-    token = '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'
+    token = 'hf_YOUR_TOKEN'
     tokenizer = AutoTokenizer.from_pretrained(model_id, token=token, padding_side='left')
     tokenizer.pad_token_id = tokenizer.eos_token_id
     model = AutoModelForCausalLM.from_pretrained(model_id, torch_dtype=torch.bfloat16, device_map='auto', token=token)
