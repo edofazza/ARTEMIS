@@ -2,6 +2,7 @@ import os
 os.environ['MPLCONFIGDIR'] = '/workdir/.matplotlib_local'
 os.environ['HF_HOME'] = '/workdir/.cache'
 
+import string
 import torch
 import numpy as np
 import random
@@ -34,7 +35,16 @@ def main(args):
     config = dict()
     config['path_dataset'] = '.'  # MODIFIED, substituted get_config
 
-    dataset = 'AnimalKingdom'
+    config = dict()
+    config['path_dataset'] = '.'  # MODIFIED, substituted get_config
+    if args.dataset == "animalkingdom":
+        dataset = 'AnimalKingdom'
+    elif args.dataset == "baboonland":
+        dataset = 'baboonland'
+    elif args.dataset == "mammalnet":
+        dataset = 'mammalnet'
+    else:
+        dataset = string.capwords(args.dataset)
     path_data = os.path.join(config['path_dataset'], dataset)
     print("[INFO] Dataset path:", path_data, flush=True)
 

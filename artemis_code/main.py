@@ -31,6 +31,8 @@ def main(args):
         dataset = 'AnimalKingdom'
     elif args.dataset == "baboonland":
         dataset = 'baboonland'
+    elif args.dataset == "mammalnet":
+        dataset = 'mammalnet'
     elif args.dataset == "ava":
         dataset = 'AVA'
     else:
@@ -57,12 +59,18 @@ def main(args):
     import torch.nn as nn
     if args.dataset in ['animalkingdom', 'baboonland']:
         criterion = nn.BCEWithLogitsLoss()
+    elif args.dataset in ['mammalnet']:
+        criterion = nn.CrossEntropyLoss()
 
     # evaluation metric
     if args.dataset in ['animalkingdom', 'baboonland']:
         from torchmetrics.classification import MultilabelAveragePrecision
         eval_metric = MultilabelAveragePrecision(num_labels=num_classes, average='micro')
         eval_metric_string = 'Multilabel Average Precision'
+    elif args.dataset in ['mammalnet']:
+        from torchmetrics.classification import MulticlassAccuracy
+        eval_metric = MulticlassAccuracy(num_classes=num_classes, average='micro')
+        eval_metric_string = 'Multiclass Accuracy'
 
     name = 'variation1_'
     if args.recurrent != 'none':
